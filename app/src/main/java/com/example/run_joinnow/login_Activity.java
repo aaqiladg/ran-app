@@ -1,5 +1,6 @@
 package com.example.run_joinnow;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,60 +10,88 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class login_Activity extends AppCompatActivity {
 
-    private EditText editEmail;
-    private EditText editPassword;
+    private EditText email;
+    private EditText password;
     private Button btnLogin;
 
     private String emailUser;
     private String passwordUser;
+    FirebaseAuth firebaseAuth;
 
     boolean isValid = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         Bundle extras = getIntent().getExtras();
         btnLogin = (Button) findViewById(R.id.btnLogin);
-        editPassword = findViewById(R.id.editPassword);
-        editEmail = findViewById(R.id.editEmail);
+        password = findViewById(R.id.editPassword);
+        email = findViewById(R.id.editEmail);
 
-        if(extras != null) {
-            emailUser = extras.getString("email");
-            passwordUser = extras.getString("password");
-            Toast.makeText(this, "Selamat Bergabung!", Toast.LENGTH_SHORT).show();
-        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                //extract and validate
+                if(email.getText().toString().isEmpty())
+                {
+                    email.setError("Email Dibutuhkan");
+                    return;
+                }
 
-                String email = editEmail.getText().toString();
-                String pass = editPassword.getText().toString();
-                isValid = validate(email, pass);
+                if(password.getText().toString().isEmpty())
+                {
+                    password.setError("Password Dibutuhkan");
+                    return;
+                }
+                //data validated
+                //login
+                firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        //login sukses
+                        Intent intent = new Intent(login_Activity.this, DietRec.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(login_Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                if (email.isEmpty() || pass.isEmpty()) {
-                    Toast.makeText(login_Activity.this, "Input your email and password correctly ", Toast.LENGTH_SHORT).show();
-                }
-                else if (isValid){
-                    Toast.makeText(login_Activity.this, "Welcome aboard!", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(login_Activity.this, "Wrong password!", Toast.LENGTH_LONG).show();
-                }
 
             }
         });
+
+
+
+
     }
 
-    private boolean validate(String email, String password){
-        if(email.equals(emailUser) && password.equals(passwordUser)){
-            return true;
+    protected void onStart()
+    {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null)
+        {
+            Intent intent = new Intent(login_Activity.this, DietRec.class);
+            startActivity(intent);
+            finish();
         }
-
-        return false;
     }
+
+
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "958921354715",
+    "project_id": "ran-app-8486b",
+    "storage_bucket": "ran-app-8486b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958921354715:android:47021bc983e50260418bfe",
+        "android_client_info": {
+          "package_name": "com.example.run_joinnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958921354715-8b2tdlkg8rqu3o5coo7r17pocvhqrhfd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC63_YshJXbmaXimxygGjr6qv0z-YBGX0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958921354715-8b2tdlkg8rqu3o5coo7r17pocvhqrhfd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

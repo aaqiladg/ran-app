@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +27,9 @@ public class bmi extends AppCompatActivity implements NavigationView.OnNavigatio
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    EditText weight, height;
+    TextView BMInum, BMIexp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +38,10 @@ public class bmi extends AppCompatActivity implements NavigationView.OnNavigatio
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+        weight = findViewById(R.id.etWeight);
+        height = findViewById(R.id.etHeight);
+        BMInum = findViewById(R.id.txtNum);
+        BMIexp = findViewById(R.id.txtExp);
 
         setSupportActionBar(toolbar);
 
@@ -45,6 +55,31 @@ public class bmi extends AppCompatActivity implements NavigationView.OnNavigatio
 
 
     }
+
+    public void CalculateBMI(View view) {
+        String w = weight.getText().toString();
+        String h = height.getText().toString();
+
+        double weightValue = Double.parseDouble(w);
+        double heightValue = Double.parseDouble(h) / 100;
+
+        double bmi = weightValue / (heightValue * heightValue);
+
+        if (bmi < 18.5) {
+            BMInum.setText (Double.toString(bmi));
+            BMIexp.setText("You're underweight :( ");
+        } else if (bmi >= 18.5 || bmi <= 24.9) {
+            BMInum.setText(Double.toString(bmi));
+            BMIexp.setText("You're healthy!");
+        } else if (bmi >= 25 || bmi <= 29.9) {
+            BMInum.setText(Double.toString(bmi));
+            BMIexp.setText("You're overweight!");
+        } else {
+            BMInum.setText(Double.toString(bmi));
+            BMIexp.setText("You're obese");
+        }
+    }
+
     public void onBackPressed()
     {
         if(drawerLayout.isDrawerOpen(GravityCompat.START))

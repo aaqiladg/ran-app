@@ -21,10 +21,11 @@
         android:textSize="24sp"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="324dp"
         android:layout_height="wrap_content"
-        android:text="testing"
-        android:textSize ="14sp"/>
+        android:fontFamily="@font/agrandir_textbold"
+        android:text="“Strength does not come from physical capacity. It comes from an indomitable will.”"
+        android:textSize="14sp" />
 
 
 

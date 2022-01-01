@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class DietRec extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -27,7 +27,7 @@ public class DietRec extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_diet_rec);
+        setContentView(R.layout.activity_home);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -63,27 +63,27 @@ public class DietRec extends AppCompatActivity implements NavigationView.OnNavig
         switch (menuItem.getItemId())
         {
             case R.id.nav_home:
-                Intent hintent = new Intent(DietRec.this, home.class);
+                Intent hintent = new Intent(home.this, weightheight.class);
                 startActivity(hintent);
                 break;
             case R.id.nav_workout:
-                Intent intent = new Intent(DietRec.this, GuidedWorkout.class);
+                Intent intent = new Intent(home.this, GuidedWorkout.class);
                 startActivity(intent);
                 break;
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent myintent = new Intent(DietRec.this, MainActivity.class);
+                Intent myintent = new Intent(home.this, MainActivity.class);
                 startActivity(myintent);
             case R.id.nav_profile:
-                Intent pintent = new Intent(DietRec.this, Profile.class);
+                Intent pintent = new Intent(home.this, Profile.class);
                 startActivity(pintent);
                 break;
             case R.id.nav_bmi:
-                Intent bintent = new Intent(DietRec.this, bmi.class);
+                Intent bintent = new Intent(home.this, bmi.class);
                 startActivity(bintent);
                 break;
             case R.id.nav_diet:
-                Intent dintent = new Intent(DietRec.this, DietRec.class);
+                Intent dintent = new Intent(home.this, DietRec.class);
                 startActivity(dintent);
                 break;
 

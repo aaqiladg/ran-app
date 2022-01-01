@@ -23,7 +23,7 @@
         android:layout_width="240dp"
         android:layout_height="71dp"
         android:fontFamily="@font/agrandir_wideblackitalic"
-        android:text="rən"
+        android:text="@string/r_n"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="64dp"

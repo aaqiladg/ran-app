@@ -1,5 +1,8 @@
 package com.example.run_joinnow;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,15 +22,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class DietRec extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class GuidedWorkout extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_diet_rec);
+        setContentView(R.layout.activity_guided_workout);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -42,9 +47,8 @@ public class DietRec extends AppCompatActivity implements NavigationView.OnNavig
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
-
-
     }
+
     public void onBackPressed()
     {
         if(drawerLayout.isDrawerOpen(GravityCompat.START))
@@ -57,33 +61,32 @@ public class DietRec extends AppCompatActivity implements NavigationView.OnNavig
         }
 
     }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId())
         {
             case R.id.nav_home:
-                Intent hintent = new Intent(DietRec.this, home.class);
+                Intent hintent = new Intent(GuidedWorkout.this, home.class);
                 startActivity(hintent);
                 break;
             case R.id.nav_workout:
-                Intent intent = new Intent(DietRec.this, GuidedWorkout.class);
+                Intent intent = new Intent(GuidedWorkout.this, GuidedWorkout.class);
                 startActivity(intent);
                 break;
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent myintent = new Intent(DietRec.this, MainActivity.class);
+                Intent myintent = new Intent(GuidedWorkout.this, MainActivity.class);
                 startActivity(myintent);
             case R.id.nav_profile:
-                Intent pintent = new Intent(DietRec.this, Profile.class);
+                Intent pintent = new Intent(GuidedWorkout.this, Profile.class);
                 startActivity(pintent);
                 break;
             case R.id.nav_bmi:
-                Intent bintent = new Intent(DietRec.this, bmi.class);
+                Intent bintent = new Intent(GuidedWorkout.this, bmi.class);
                 startActivity(bintent);
                 break;
             case R.id.nav_diet:
-                Intent dintent = new Intent(DietRec.this, DietRec.class);
+                Intent dintent = new Intent(GuidedWorkout.this, DietRec.class);
                 startActivity(dintent);
                 break;
 

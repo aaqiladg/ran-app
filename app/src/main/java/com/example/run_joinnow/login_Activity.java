@@ -62,7 +62,7 @@ public class login_Activity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         //login sukses
-                        Intent intent = new Intent(login_Activity.this, DietRec.class);
+                        Intent intent = new Intent(login_Activity.this, home.class);
                         startActivity(intent);
                         finish();
                     }
@@ -87,7 +87,7 @@ public class login_Activity extends AppCompatActivity {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null)
         {
-            Intent intent = new Intent(login_Activity.this, DietRec.class);
+            Intent intent = new Intent(login_Activity.this, Profile.class);
             startActivity(intent);
             finish();
         }

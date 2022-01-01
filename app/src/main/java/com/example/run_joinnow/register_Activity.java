@@ -86,13 +86,6 @@ public class register_Activity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
 
-
-
-
-//
-
-
-
                         //oold
 //                        userID = fAuth.getCurrentUser().getUid();
 //                        DocumentReference documentReference = fStore.collection("users").document(userID);
@@ -111,8 +104,6 @@ public class register_Activity extends AppCompatActivity {
 
 
                         //move to login
-
-
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -125,11 +116,12 @@ public class register_Activity extends AppCompatActivity {
 
                 //get values
                 userID = fAuth.getCurrentUser().getUid();
-                UserHelper helper = new UserHelper(emailUser, passwordUser, namaDepan, namaBelakang);
-                reference.child(userID).setValue(helper);
+                UserHelper help = new UserHelper(emailUser, passwordUser, namaDepan, namaBelakang, "", "");
+                reference.child(userID).setValue(help);
 
-                Intent intent = new Intent(register_Activity.this, login_Activity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(register_Activity.this, login_Activity.class);
+                Intent myIntent = new Intent(v.getContext(), weightheight.class);
+                startActivity(myIntent);
 //
 //
 //                Intent intent = new Intent(register_Activity.this, login_Activity.class);

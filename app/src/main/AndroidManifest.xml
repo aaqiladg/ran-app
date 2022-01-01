@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Run_JoinNow">
         <activity
+            android:name=".weightheight"
+            android:exported="true" />
+        <activity
+            android:name=".home"
+            android:exported="true" />
+        <activity
+            android:name=".bmi"
+            android:exported="true" />
+        <activity
+            android:name=".Profile"
+            android:exported="true" />
+        <activity
+            android:name=".GuidedWorkout"
+            android:exported="true" />
+        <activity
             android:name=".DietRec"
             android:exported="true" />
         <activity

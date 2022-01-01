@@ -60,11 +60,13 @@
             android:id="@+id/imageView7"
             android:layout_width="693dp"
             android:layout_height="819dp"
-            android:layout_marginBottom="88dp"
+            android:layout_marginBottom="80dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.351"
+            app:layout_constraintHorizontal_bias="0.315"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/googlemapta" />
 
         <ImageView

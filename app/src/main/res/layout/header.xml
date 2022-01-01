@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:orientation="vertical"
+    android:background="@color/ic_banner_background"
     android:gravity="bottom"
-    android:background="@drawable/ic_launcher_background"
+    android:orientation="vertical"
     android:padding="20dp">
 
     <ImageView
@@ -13,12 +13,12 @@
         android:src="@drawable/ic_baseline_directions_run_24" />
 
     <TextView
-        android:layout_width="wrap_content"
         android:id="@+id/name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/dexapro_bold"
         android:text=""
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <TextView
         android:layout_width="324dp"
@@ -26,7 +26,6 @@
         android:fontFamily="@font/agrandir_textbold"
         android:text="“Strength does not come from physical capacity. It comes from an indomitable will.”"
         android:textSize="14sp" />
-
 
 
 </LinearLayout>

@@ -5,6 +5,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import android.widget.Chronometer;
+import android.widget.Toast;
+import android.view.View;
+import android.os.SystemClock;
+import android.os.Bundle;
 
 
 import android.content.Intent;
@@ -21,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,7 +35,13 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     Toolbar toolbar;
 
     TextView timerText;
+
+    private Chronometer chronometer;
+    private long pauseOffset;
+    private boolean running;
+    private String tim;
     Button btnStartStop;
+    Button share;
 
     Timer timer;
     TimerTask timerTask;
@@ -42,93 +54,83 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        timerText = (TextView) findViewById(R.id.timerText);
-        btnStartStop = (Button) findViewById(R.id.btnStartStop);
+
 
         timer = new Timer();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+        share = findViewById(R.id.share);
 
         setSupportActionBar(toolbar);
 
+        chronometer = findViewById(R.id.chronometer);
+        chronometer.setFormat("Time Ran: %s");
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        long elapsedTime = SystemClock.elapsedRealtime();
+
+
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                if ((SystemClock.elapsedRealtime() - chronometer.getBase()) >= 1000000) {
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    Toast.makeText(home.this, "Done!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        String time = chronometer.getText().toString();
 
         navigationView.setNavigationItemSelectedListener(this);
-
-        btnStartStop.setOnClickListener(new View.OnClickListener() {
+        
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (timerStarted == false) {
-                    timerStarted = true;
-                    btnStartStop.setText("stop");
+            public void onClick(View v) {
 
-                    startTimer();
-                } else {
-                    timerStarted = false;
-                    btnStartStop.setText("start");
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "I just finished my Run");
+                sendIntent.setType("text/plain");
 
-                    timerTask.cancel();
-                }
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+
             }
         });
+
     }
 
-    private void startTimer()
-    {
-        timerTask = new TimerTask()
-        {
-            @Override
-            public void run()
-            {
-                runOnUiThread(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        time++;
-                        timerText.setText(getTimerText());
-                    }
-                });
-            }
-
-        };
-        timer.scheduleAtFixedRate(timerTask, 0 ,1000);
-    }
-
-
-    private String getTimerText()
-    {
-        int rounded = (int) Math.round(time);
-
-        int seconds = ((rounded % 86400) % 3600) % 60;
-        int minutes = ((rounded % 86400) % 3600) / 60;
-        int hours = ((rounded % 86400) / 3600);
-
-        return formatTime(seconds, minutes, hours);
-    }
-
-    private String formatTime(int seconds, int minutes, int hours)
-    {
-        return String.format("%02d",hours) + " : " + String.format("%02d",minutes) + " : " + String.format("%02d",seconds);
-    }
-    public void onBackPressed()
-    {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START))
-        {
-            drawerLayout.closeDrawer(GravityCompat.START);
+    public void startChronometer(View v) {
+        if (!running) {
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            chronometer.start();
+            running = true;
         }
-        else
-        {
-            super.onBackPressed();
-        }
-
     }
+
+    public void pauseChronometer(View v) {
+        if (running) {
+            chronometer.stop();
+            pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+            running = false;
+
+
+        }
+    }
+
+
+
+    public void resetChronometer(View v) {
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        pauseOffset = 0;
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -157,6 +159,10 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_diet:
                 Intent dintent = new Intent(home.this, DietRec.class);
                 startActivity(dintent);
+                break;
+            case R.id.nav_contact:
+                Intent cintent = new Intent(home.this, contact.class);
+                startActivity(cintent);
                 break;
 
         }

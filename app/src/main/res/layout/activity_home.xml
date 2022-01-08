@@ -25,23 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btnStartStop"
-            android:layout_width="110dp"
-            android:layout_height="42dp"
-            android:background="@drawable/rounded_corners_2"
-            android:backgroundTint="#FF6A0D"
-            android:fontFamily="@font/dexapro_medium"
-            android:onClick="startStopTapped"
-            android:text="START"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView12"
-            app:layout_constraintVertical_bias="0.407" />
+
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -56,46 +40,75 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.001" />
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="693dp"
-            android:layout_height="819dp"
-            android:layout_marginBottom="80dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="398dp"
+            android:layout_height="121dp"
+            android:textAlignment="center"
+            android:textColor="#FF9800"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toTopOf="@+id/button2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.315"
+            app:layout_constraintHorizontal_bias="0.461"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/googlemapta" />
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="96dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timerText"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/button" />
-
-        <TextView
-            android:id="@+id/timerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="240dp"
-            android:fontFamily="@font/agrandir_grandheavy"
-            android:text="00:00:00"
-            android:textColor="#FF6A0D"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="155dp"
+            android:layout_height="92dp"
+            android:backgroundTint="#FF9800"
+            android:onClick="startChronometer"
+            android:text="Start"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.977" />
+
+        <Button
+            android:id="@+id/share"
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:backgroundTint="#FF9800"
+            android:onClick="startChronometer"
+            android:text="Share"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.974" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="144dp"
+            android:layout_height="101dp"
+            android:backgroundTint="#FF9800"
+            android:onClick="pauseChronometer"
+            android:text="Pause"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.755" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="147dp"
+            android:layout_height="86dp"
+            android:backgroundTint="#FF9800"
+            android:onClick="resetChronometer"
+            android:text="Reset"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/button3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -27,9 +27,15 @@
             android:icon = "@drawable/calculate"
             />
         <item
+            android:id="@+id/nav_contact"
+            android:title="Contact"
+            android:icon = "@drawable/common_full_open_on_phone"/>
+
+        <item
             android:id="@+id/nav_logout"
             android:title="Logout"
             android:icon = "@drawable/back"/>
+
     </group>
 
 
